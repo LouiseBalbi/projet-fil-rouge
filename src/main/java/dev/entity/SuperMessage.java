@@ -4,17 +4,22 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type")
+@DiscriminatorColumn(name = "type_")
 @Table(name = "Message")
 public class SuperMessage extends SuperEntity {
 	
 	protected String contenu;
-	protected String like;
-	protected String type;
+	protected String like_;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	
 	public String getContenu() {
 		return contenu;
@@ -23,19 +28,25 @@ public class SuperMessage extends SuperEntity {
 		this.contenu = contenu;
 	}
 	public String getLike() {
-		return like;
+		return like_;
 	}
 	public void setLike(String like) {
-		this.like = like;
+		this.like_ = like_;
 	}
-	public String getType() {
-		return type;
+	public String getLike_() {
+		return like_;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setLike_(String like_) {
+		this.like_ = like_;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
-	
+
 	
 
 }

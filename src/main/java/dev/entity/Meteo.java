@@ -2,6 +2,8 @@ package dev.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Meteo extends SuperEntity {
@@ -19,7 +21,13 @@ public class Meteo extends SuperEntity {
 	private Double humidity;
 	@Column(scale = 4, precision = 2)
 	private Double pressure;
-	private Meteo prevision;
+	
+	//TODO 
+	//private Meteo prevision;
+	
+	@ManyToOne
+	@JoinColumn(name = "ville_id")
+	private Ville ville;
 	
 	public Double getTemp() {
 		return temp;
@@ -63,13 +71,21 @@ public class Meteo extends SuperEntity {
 	public void setPressure(Double pressure) {
 		this.pressure = pressure;
 	}
-	public Meteo getPrevision() {
-		return prevision;
+	public Ville getVille() {
+		return ville;
 	}
-	public void setPrevision(Meteo prevision) {
-		this.prevision = prevision;
+	public void setVille(Ville ville) {
+		this.ville = ville;
 	}
 	
+	
+//	public Meteo getPrevision() {
+//		return prevision;
+//	}
+//	public void setPrevision(Meteo prevision) {
+//		this.prevision = prevision;
+//	}
+//	
 	
 
 }
