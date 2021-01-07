@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.entity.Discussion;
-import dev.exception.repoException;
+import dev.exception.RepoException;
 import dev.service.DiscussionService;
 
 @RestController
@@ -31,7 +31,7 @@ public class DiscussionController {
 	public ResponseEntity<?>readById(@PathVariable Long id){
 		try {
 			return ResponseEntity.ok().body(discussionServ.readById(id));
-		} catch (repoException e) {
+		} catch (RepoException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
@@ -43,7 +43,7 @@ public class DiscussionController {
 		try {
 			discussionServ.delete(id);
 			return ResponseEntity.ok().body("discussion supprimer");
-		} catch (repoException e) {
+		} catch (RepoException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
