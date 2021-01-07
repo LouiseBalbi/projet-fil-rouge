@@ -1,6 +1,7 @@
 package dev.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,11 +36,14 @@ public class DiscussionController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
+	
 	@PostMapping
 	public ResponseEntity<?>create(@RequestBody Discussion discussion){
 		return ResponseEntity.ok().body(discussionServ.create(discussion));
 	}
-	public ResponseEntity<?>delete(Long id){
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?>delete(@PathVariable Long id){
 		try {
 			discussionServ.delete(id);
 			return ResponseEntity.ok().body("discussion supprimer");

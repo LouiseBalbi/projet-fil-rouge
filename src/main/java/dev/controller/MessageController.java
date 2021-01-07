@@ -47,8 +47,8 @@ public class MessageController {
 		return ResponseEntity.ok().body(messageService.create(message));
 	}
 
-	@DeleteMapping
-	public ResponseEntity<?> delete(Long id) {
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable Long id) {
 		try {
 			messageService.delete(id);
 			return ResponseEntity.ok().body("Message effacé");

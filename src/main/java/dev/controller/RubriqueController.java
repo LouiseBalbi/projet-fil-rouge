@@ -48,8 +48,8 @@ public class RubriqueController {
 		return ResponseEntity.ok().body(rubriqueService.create(rubrique));
 	}
 
-	@DeleteMapping
-	public ResponseEntity<?> delete(Long id) {
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable Long id) {
 		try {
 			rubriqueService.delete(id);
 			return ResponseEntity.ok().body("Rubrique effacée");
