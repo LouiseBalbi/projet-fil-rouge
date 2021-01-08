@@ -52,6 +52,4 @@ public class DiscussionController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
-
 }
