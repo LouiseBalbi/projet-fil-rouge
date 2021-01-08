@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.dto.RubriqueDtoQuery;
 import dev.entity.Rubrique;
 import dev.exception.RepoException;
 import dev.service.RubriqueService;
@@ -44,8 +45,8 @@ public class RubriqueController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Rubrique rubrique) {
-		return ResponseEntity.ok().body(rubriqueService.create(rubrique));
+	public ResponseEntity<?> create(@RequestBody RubriqueDtoQuery query) {
+		return ResponseEntity.ok().body(rubriqueService.create(query));
 	}
 
 	@DeleteMapping("/{id}")

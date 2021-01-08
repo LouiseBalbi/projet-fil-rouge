@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+
+import dev.dto.RubriqueDtoQuery;
 import dev.entity.Rubrique;
+import dev.entity.User;
 import dev.exception.RepoException;
 import dev.repository.RubriqueRepository;
 
@@ -41,8 +44,16 @@ public class RubriqueService {
 		}
 	}
 	
-	public Rubrique create(Rubrique rubrique) {
-		return rubriqueRepo.save(rubrique);
+	public Rubrique create(RubriqueDtoQuery query) {
+		 Rubrique r =new Rubrique();
+		 User u = new User();
+		 u.setId(query.getUserId());
+		 r.setUser(u);
+		 r.setDateAjout(query.getDateAjout());
+		 //r.setDiscussions(discussions);
+		 r.setId(query.getId() != null ? query.getId() : null);
+		 r.setTitre(query.getTitre());
+		return rubriqueRepo.save(r);
 	}
 	
 	public void delete(Long id) throws RepoException {

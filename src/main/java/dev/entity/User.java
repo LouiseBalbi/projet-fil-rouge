@@ -8,6 +8,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import dev.enumerations.Role;
 
 @Entity
@@ -24,6 +26,7 @@ public class User extends SuperEntity {
 	private List<Favori> favoris = new ArrayList<>();
 	
 	@OneToMany(targetEntity = Rubrique.class, mappedBy = "user")
+	@JsonIgnore
 	private List<Rubrique> rubriques = new ArrayList<>();
 	
 	@OneToMany(targetEntity = Discussion.class, mappedBy = "user")
