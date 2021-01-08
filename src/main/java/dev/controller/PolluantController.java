@@ -9,49 +9,53 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.entity.Discussion;
+import dev.entity.Polluant;
 import dev.exception.RepoException;
-import dev.service.DiscussionService;
+import dev.service.PolluantService;
 
 @RestController
-@RequestMapping("api/discussion")
-public class DiscussionController {
+@RequestMapping("/api/polluant")
+public class PolluantController {
 
-	private DiscussionService discussionServ;
+	private PolluantService polluantService;
 
-	public DiscussionController(DiscussionService discussionServ) {
+	/**
+	 * @param polluantService
+	 */
+	public PolluantController(PolluantService polluantService) {
 		super();
-		this.discussionServ = discussionServ;
-	}
-	@GetMapping
-	public ResponseEntity<?>readAll(){
-		return ResponseEntity.ok().body(discussionServ.readAll());
+		this.polluantService = polluantService;
 	}
 	
+	@GetMapping
+	public ResponseEntity<?> findAll() {
+		return ResponseEntity.ok().body(polluantService.readAll());
+
+	}
+
 	@GetMapping("/{id}")
-	public ResponseEntity<?>readById(@PathVariable Long id){
+	public ResponseEntity<?> findById(@PathVariable Long id) {
 		try {
-			return ResponseEntity.ok().body(discussionServ.readById(id));
+			return ResponseEntity.ok().body(polluantService.readById(id));
 		} catch (RepoException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<?>create(@RequestBody Discussion discussion){
-		return ResponseEntity.ok().body(discussionServ.create(discussion));
+	public ResponseEntity<?> create(@RequestBody Polluant polluant) {
+		return ResponseEntity.ok().body(polluantService.create(polluant));
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?>delete(@PathVariable Long id){
+	public ResponseEntity<?> delete(@PathVariable Long id) {
 		try {
-			discussionServ.delete(id);
-			return ResponseEntity.ok().body("Discussion effacée");		
+			polluantService.delete(id);
+			return ResponseEntity.ok().body("Polluant effacé");
 		} catch (RepoException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 
 	}
-	
 	
 }

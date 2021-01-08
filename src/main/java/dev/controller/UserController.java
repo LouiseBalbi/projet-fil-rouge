@@ -9,49 +9,53 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.entity.Discussion;
+import dev.entity.User;
 import dev.exception.RepoException;
-import dev.service.DiscussionService;
+import dev.service.UserService;
 
 @RestController
-@RequestMapping("api/discussion")
-public class DiscussionController {
+@RequestMapping("/api/user")
+public class UserController {
+	
+	private UserService userService;
 
-	private DiscussionService discussionServ;
-
-	public DiscussionController(DiscussionService discussionServ) {
+	/**
+	 * @param userService
+	 */
+	public UserController(UserService userService) {
 		super();
-		this.discussionServ = discussionServ;
-	}
-	@GetMapping
-	public ResponseEntity<?>readAll(){
-		return ResponseEntity.ok().body(discussionServ.readAll());
+		this.userService = userService;
 	}
 	
+	@GetMapping
+	public ResponseEntity<?> findAll() {
+		return ResponseEntity.ok().body(userService.readAll());
+
+	}
+
 	@GetMapping("/{id}")
-	public ResponseEntity<?>readById(@PathVariable Long id){
+	public ResponseEntity<?> findById(@PathVariable Long id) {
 		try {
-			return ResponseEntity.ok().body(discussionServ.readById(id));
+			return ResponseEntity.ok().body(userService.readById(id));
 		} catch (RepoException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<?>create(@RequestBody Discussion discussion){
-		return ResponseEntity.ok().body(discussionServ.create(discussion));
+	public ResponseEntity<?> create(@RequestBody User user) {
+		return ResponseEntity.ok().body(userService.create(user));
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?>delete(@PathVariable Long id){
+	public ResponseEntity<?> delete(@PathVariable Long id) {
 		try {
-			discussionServ.delete(id);
-			return ResponseEntity.ok().body("Discussion effacée");		
+			userService.delete(id);
+			return ResponseEntity.ok().body("Rubrique effacée");
 		} catch (RepoException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 
 	}
-	
-	
+
 }
