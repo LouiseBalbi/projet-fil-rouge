@@ -12,30 +12,30 @@ import dev.repository.DiscussionRepository;
 @Service
 public class DiscussionService {
 
-	private DiscussionRepository discussionRepo;
+    private DiscussionRepository discussionRepo;
 
-	public DiscussionService(DiscussionRepository discussionRepo) {
-		super();
-		this.discussionRepo = discussionRepo;
-	}
+    public DiscussionService(DiscussionRepository discussionRepo) {
+        super();
+        this.discussionRepo = discussionRepo;
+    }
 
-	public List<Discussion> readAll() {
-		return discussionRepo.findAll();
-	}
+    public List<Discussion> readAll() {
+        return discussionRepo.findAll();
+    }
 
-	public Discussion readById(Long id) throws RepoException {
-	Optional<Discussion> optDiscut=discussionRepo.findById(id);
-	if(optDiscut.isPresent()) {
-		return optDiscut.get();
-	}else throw new RepoException("id discussion non trouvée");
-	}
+    public Discussion readById(Long id) throws RepoException {
+        Optional<Discussion> optDiscussion = discussionRepo.findById(id);
+        if (optDiscussion.isPresent()) {
+            return optDiscussion.get();
+        } else throw new RepoException("id_discussion non trouvé");
+    }
 
-	public Discussion create(Discussion discussion) {
-		return discussionRepo.save(discussion);
-	}
+    public Discussion create(Discussion discussion) {
+        return discussionRepo.save(discussion);
+    }
 
-	public void delete(long id) throws RepoException {
-		discussionRepo.delete(this.readById(id));
-	}
+    public void delete(long id) throws RepoException {
+        discussionRepo.delete(this.readById(id));
+    }
 
 }

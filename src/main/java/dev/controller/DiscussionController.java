@@ -17,41 +17,39 @@ import dev.service.DiscussionService;
 @RequestMapping("api/discussion")
 public class DiscussionController {
 
-	private DiscussionService discussionServ;
+    private DiscussionService discussionServ;
 
-	public DiscussionController(DiscussionService discussionServ) {
-		super();
-		this.discussionServ = discussionServ;
-	}
-	@GetMapping
-	public ResponseEntity<?>readAll(){
-		return ResponseEntity.ok().body(discussionServ.readAll());
-	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<?>readById(@PathVariable Long id){
-		try {
-			return ResponseEntity.ok().body(discussionServ.readById(id));
-		} catch (RepoException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
-	}
-	
-	@PostMapping
-	public ResponseEntity<?>create(@RequestBody Discussion discussion){
-		return ResponseEntity.ok().body(discussionServ.create(discussion));
-	}
-	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?>delete(@PathVariable Long id){
-		try {
-			discussionServ.delete(id);
-			return ResponseEntity.ok().body("Discussion effacée");		
-		} catch (RepoException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
+    public DiscussionController(DiscussionService discussionServ) {
+        super();
+        this.discussionServ = discussionServ;
+    }
 
-	}
-	
-	
+    @GetMapping
+    public ResponseEntity<?> findAll() {
+        return ResponseEntity.ok().body(discussionServ.readAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok().body(discussionServ.readById(id));
+        } catch (RepoException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody Discussion discussion) {
+        return ResponseEntity.ok().body(discussionServ.create(discussion));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        try {
+            discussionServ.delete(id);
+            return ResponseEntity.ok().body("discussion supprimée");
+        } catch (RepoException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
