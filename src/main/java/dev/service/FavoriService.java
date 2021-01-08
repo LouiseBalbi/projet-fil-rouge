@@ -3,10 +3,12 @@ package dev.service;
 import dev.entity.Favori;
 import dev.exception.RepoException;
 import dev.repository.FavoriRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class FavoriService {
 
     private FavoriRepository favoriRepo;

@@ -6,6 +6,7 @@ import dev.service.FavoriService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@RestController
 public class FavoriController {
 
     private FavoriService favoriService;
