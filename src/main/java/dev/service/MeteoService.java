@@ -5,7 +5,6 @@ import dev.exception.RepoException;
 import dev.repository.MeteoRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,10 +17,6 @@ public class MeteoService {
     }
 
     public List<Meteo> readAll() {
-        List<Meteo> listeM = new ArrayList<>();
-        for ( Meteo meteo : meteoRepo.findAll()) {
-            listeM.add(meteo);
-        }
         return meteoRepo.findAll();
     }
 
